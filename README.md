@@ -1,12 +1,9 @@
-# UrbanFlow AI
+# PravahAI
 
-**NEURAX HACKATHON 3.0 — Urban Traffic Flow, Incident Intelligence & Network Optimization**
-
----
 
 ## 1. Project Overview
 
-UrbanFlow AI is a software-only AI traffic decision-support system designed for Hyderabad-like urban traffic conditions.
+PravahAI is a software-only AI traffic decision-support system designed for Hyderabad-like urban traffic conditions.
 
 The system uses **SUMO (Simulation of Urban MObility)** as its core simulation environment. AI models analyze simulated traffic data to detect congestion, identify abnormal behavior, forecast future conditions, and recommend interventions. Those interventions are tested back inside SUMO, and the results are compared before being presented on a decision-support dashboard.
 
@@ -326,18 +323,8 @@ Not every technology listed above is mandatory. The core stack is SUMO + TraCI +
 
 ---
 
-## 9. Team Responsibilities
 
-| Role | Responsibility |
-|------|---------------|
-| AI / ML | Congestion detection, anomaly detection, forecasting models, impact evaluation metrics |
-| SUMO / Simulation | Road network setup, demand and route files, TraCI integration, scenario configuration |
-| Backend / Decision Engine | Routing logic, diversion and infrastructure scenario generation, scenario execution |
-| Frontend / Integration | Dashboard, map rendering, charts, system integration and end-to-end wiring |
-
----
-
-## 10. Demo Scenario
+## 9. Demo Scenario
 
 The demonstration follows this sequence:
 
@@ -358,7 +345,7 @@ The demonstration follows this sequence:
 
 ---
 
-## 11. Evaluation Metrics
+## 10. Evaluation Metrics
 
 | Metric | Description |
 |--------|-------------|
@@ -372,7 +359,7 @@ The demonstration follows this sequence:
 
 ---
 
-## 12. Scope and Limitations
+## 11. Scope and Limitations
 
 UrbanFlow AI is a **software-only, simulation-based, advisory system**.
 
@@ -391,7 +378,7 @@ All results are based on SUMO simulations and are intended to support decision-m
 
 ---
 
-## 13. Future Scope
+## 12. Future Scope
 
 - Integration with real-time traffic data feeds
 - Weather and event data as simulation inputs
@@ -402,7 +389,7 @@ All results are based on SUMO simulations and are intended to support decision-m
 
 ---
 
-## 14. Getting Started
+## 13. Getting Started
 
 **Prerequisites:** SUMO and Python 3.9+ must be installed.
 
@@ -442,17 +429,3 @@ python main.py
 
 ---
 
-## 15. Project Status
-
-```
-Project   : UrbanFlow AI
-Hackathon : NEURAX HACKATHON 3.0
-Type      : Software-only AI traffic decision-support system
-Simulation: SUMO (Simulation of Urban MObility)
-Status    : In Development
-Team      : [Your Team Name]
-```
-
----
-
-*UrbanFlow AI — NEURAX HACKATHON 3.0*
