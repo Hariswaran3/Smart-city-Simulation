@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-09-20T02:31:05.032336",
+  "dataset_directory": "d:\\data-urban\\NEURAX_SMART_CITIES_TRAINING_V2",
+  "files_checked": [
+    "traffic_train.csv",
+    "traffic_validation.csv",
+    "forecast_targets_train.csv",
+    "forecast_targets_validation.csv",
+    "network.csv",
+    "nodes.csv",
+    "incidents_train.csv",
+    "incidents_validation.csv",
+    "roadworks_train.csv",
+    "roadworks_validation.csv",
+    "context_train.csv",
+    "context_validation.csv",
+    "signal_plans.csv",
+    "od_demand_profiles.csv",
+    "planning_candidates.csv",
+    "scenario_examples.csv",
+    "turn_restrictions.csv"
+  ],
+  "key_facts": {
+    "segments": 436,
+    "nodes": 120,
+    "sampling_interval_min": 5,
+    "training_days": 15,
+    "validation_days": 4,
+    "training_traffic_rows": 1883520,
+    "validation_traffic_rows": 502272,
+    "forecast_horizons": [
+      "15m",
+      "30m",
+      "45m",
+      "60m"
+    ],
+    "target_types": [
+      "speed",
+      "flow",
+      "congestion"
+    ],
+    "leakage_prevention": "forecast_targets files strictly excluded from input features"
+  }
+}

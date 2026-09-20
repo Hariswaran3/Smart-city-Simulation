@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+.env
+.venv
+env/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ML Models (large binary files)
+dashboard3/saved_models/
+traffic-intelligence/models/*.pkl
+
+# SUMO output/temp files
+dashboard3/sumo_out.txt
+dashboard3/frame.png
+dashboard3/latest_screenshot.jpg
+dashboard3/signal_states.json
+
+# Data files (large CSVs)
+NEURAX_SMART_CITIES_TRAINING_V2/*.csv
+
+# Misc
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+profile_data.json

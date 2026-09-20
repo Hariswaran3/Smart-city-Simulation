@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+  <vType id="car"   accel="2.6" decel="4.5" sigma="0.5" length="4.5"  maxSpeed="16.67" color="yellow"/>
+  <vType id="truck" accel="1.3" decel="3.5" sigma="0.5" length="12.0" maxSpeed="11.11" color="1,0.5,0"/>
+
+  <route id="thru" edges="AB BC CD"/>
+  <route id="half" edges="AB BC"/>
+
+  <flow id="main"  type="car"   route="thru" begin="0" end="3600" vehsPerHour="1200" departLane="best" departSpeed="max"/>
+  <flow id="short" type="car"   route="half" begin="0" end="3600" vehsPerHour="200"  departLane="best" departSpeed="max"/>
+  <flow id="trucks" type="truck" route="thru" begin="0" end="3600" vehsPerHour="120" departLane="best" departSpeed="max"/>
+</routes>

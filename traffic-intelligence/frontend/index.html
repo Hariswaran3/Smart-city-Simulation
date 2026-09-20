@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEURAX // Cyberpunk AI Urban Traffic Control System</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Cyberpunk Theme Stylesheet -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">
+            <i class="fa-solid fa-microchip"></i>
+            NEURAX <span class="sub">// TRAFFIC MATRIX 2.0</span>
+        </div>
+        <div class="header-controls">
+            <div class="horizon-selector">
+                <button class="horizon-btn active" data-h="15m">NOW / +15M</button>
+                <button class="horizon-btn" data-h="30m">+30M</button>
+                <button class="horizon-btn" data-h="45m">+45M</button>
+                <button class="horizon-btn" data-h="60m">+60M</button>
+            </div>
+            <div class="timestamp-badge" id="live-time">
+                <i class="fa-solid fa-terminal me-1"></i> <span id="time-val">INITIALIZING...</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN SECTION -->
+    <div class="main-container">
+        <!-- LEFT PANEL -->
+        <div class="left-panel">
+            <div class="panel-card">
+                <h3><i class="fa-solid fa-network-wired"></i> Network Grid Matrix</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-box">
+                        <div class="kpi-val" id="kpi-total">-</div>
+                        <div class="kpi-lbl">Total Links</div>
+                    </div>
+                    <div class="kpi-box red">
+                        <div class="kpi-val" id="kpi-severe">-</div>
+                        <div class="kpi-lbl">Severe Critical</div>
+                    </div>
+                    <div class="kpi-box orange">
+                        <div class="kpi-val" id="kpi-heavy">-</div>
+                        <div class="kpi-lbl">Heavy Congested</div>
+                    </div>
+                    <div class="kpi-box yellow">
+                        <div class="kpi-val" id="kpi-bottlenecks">-</div>
+                        <div class="kpi-lbl">Bottlenecks</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <h3><i class="fa-solid fa-radiation"></i> Incident Alerts</h3>
+                <div class="detail-row">
+                    <span>Active Incidents</span>
+                    <span class="detail-val" id="inc-count" style="color: var(--cyber-red); text-shadow: 0 0 8px var(--cyber-red);">-</span>
+                </div>
+                <div class="detail-row">
+                    <span>Active Roadworks</span>
+                    <span class="detail-val" id="work-count" style="color: var(--cyber-orange); text-shadow: 0 0 8px var(--cyber-orange);">-</span>
+                </div>
+            </div>
+
+            <div class="panel-card" style="flex:1;">
+                <h3><i class="fa-solid fa-bolt"></i> Bottleneck Neural Ranks</h3>
+                <div id="bottleneck-list" style="max-height: 250px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
+                    <div style="color: var(--text-muted); font-size: 0.8rem;">Scanning neural grid...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CENTER MAP AREA -->
+        <div class="center-panel">
+            <div class="view-toggles">
+                <button class="view-btn active" data-view="map-view"><i class="fa-solid fa-map"></i> NETWORK MAP</button>
+                <button class="view-btn" data-view="sumo-view"><i class="fa-solid fa-car-side"></i> SUMO SIMULATION</button>
+            </div>
+            <div id="map" class="main-view active"></div>
+            <div id="sumo-view" class="main-view" style="display: none; background: var(--cyber-black); border: 1px solid var(--cyber-border); padding: 20px; overflow-y: auto;">
+                <img id="sumo-canvas" src="/sumo/stream" width="800" height="400" style="display: none; margin: 0 auto 20px auto; background: #0a0e1a; border: 1px solid var(--cyber-cyan); border-radius: 4px; object-fit: cover;">
+                <div id="sumo-results" style="margin-top: 20px; color: #fff;">
+                    <h2 style="color: var(--cyber-cyan); text-align: center; margin-top: 20%"><i class="fa-solid fa-satellite-dish"></i> WAITING FOR SCENARIO...</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="right-panel">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="tab-segment">SEGMENT</button>
+                <button class="tab-btn" data-tab="tab-propagation">PROPAGATION</button>
+                <button class="tab-btn" data-tab="tab-intervention">INTERVENE</button>
+                <button class="tab-btn" data-tab="tab-scenario" style="color: var(--cyber-orange);"><i class="fa-solid fa-flask"></i> LAB</button>
+            </div>
+
+            <!-- TAB 1: SEGMENT -->
+            <div class="tab-content active" id="tab-segment">
+                <div class="panel-card">
+                    <h3 id="selected-seg-title"><i class="fa-solid fa-crosshairs"></i> Select Road Segment</h3>
+                    <div id="seg-details">
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">Click any neon link on the map vector grid to inspect neural state metrics & feature importances.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: PROPAGATION -->
+            <div class="tab-content" id="tab-propagation">
+                <div class="panel-card">
+                    <h3><i class="fa-solid fa-circle-nodes"></i> Spatial Queue Spillback</h3>
+                    <div id="propagation-details">
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">Select a segment to traverse upstream and downstream propagation depth.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: INTERVENTIONS -->
+            <div class="tab-content" id="tab-intervention">
+                <div class="panel-card">
+                    <h3><i class="fa-solid fa-shield-halved"></i> Action Candidates</h3>
+                    <div id="intervention-details">
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">AI-ranked candidate interventions for traffic operators.</p>
+                    </div>
+                </div>
+                <div class="panel-card">
+                    <h3><i class="fa-solid fa-vr-cardboard"></i> What-If Counterfactual</h3>
+                    <div id="counterfactual-box">
+                        <button class="btn-action" id="btn-run-whatif"><i class="fa-solid fa-play"></i> SIMULATE SCENARIO</button>
+                        <div id="whatif-result" style="margin-top: 10px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: SCENARIO LAB -->
+            <div class="tab-content" id="tab-scenario">
+                <div class="panel-card">
+                    <h3 style="color: var(--cyber-orange);"><i class="fa-solid fa-flask"></i> Congestion Lab</h3>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">Configure and run isolated SUMO microscopic traffic scenarios.</p>
+                    
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label style="font-size: 0.75rem; color: var(--cyber-cyan);">NETWORK GEOMETRY</label>
+                        <select id="lab-network" style="width: 100%; background: var(--cyber-black); color: #fff; border: 1px solid var(--cyber-border); padding: 5px;">
+                            <option value="four_way">4-Way Intersection</option>
+                            <option value="one_way">1-Way Corridor</option>
+                            <option value="two_way">2-Way Arterial</option>
+                            <option value="t_junction">T-Junction</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label style="font-size: 0.75rem; color: var(--cyber-cyan);">TRAFFIC DEMAND</label>
+                        <select id="lab-demand" style="width: 100%; background: var(--cyber-black); color: #fff; border: 1px solid var(--cyber-border); padding: 5px;">
+                            <option value="normal">Normal</option>
+                            <option value="peak">Peak Hour</option>
+                            <option value="directional_peak">Directional Peak</option>
+                            <option value="surge">Sudden Surge</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label style="font-size: 0.75rem; color: var(--cyber-cyan);">DISRUPTION INJECTION</label>
+                        <select id="lab-disruption" style="width: 100%; background: var(--cyber-black); color: #fff; border: 1px solid var(--cyber-border); padding: 5px;">
+                            <option value="none">None</option>
+                            <option value="accident">Accident (Blockage)</option>
+                            <option value="roadwork">Roadwork (Capacity Drop)</option>
+                            <option value="lane_block">Lane Closed</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-action" id="btn-run-lab" style="background: rgba(255,102,0,0.2); border-color: var(--cyber-orange); color: var(--cyber-orange);"><i class="fa-solid fa-play"></i> RUN SCENARIO</button>
+                    <div id="lab-status" style="margin-top: 10px; font-size: 0.8rem;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM PANEL -->
+    <div class="bottom-panel">
+        <div class="chart-box">
+            <canvas id="chart-congestion"></canvas>
+        </div>
+        <div class="chart-box">
+            <canvas id="chart-speed-flow"></canvas>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- App Script -->
+    <script src="/static/app.js"></script>
+</body>
+</html>

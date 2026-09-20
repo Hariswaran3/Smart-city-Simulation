@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+  <vType id="car"   accel="2.6" decel="4.5" sigma="0.5" length="4.5"  maxSpeed="13.89" color="yellow"/>
+  <vType id="truck" accel="1.3" decel="3.5" sigma="0.5" length="12.0" maxSpeed="11.11" color="1,0.5,0"/>
+  <vType id="bus"   accel="1.5" decel="3.8" sigma="0.5" length="12.0" maxSpeed="11.11" color="0,0.8,0"/>
+
+  <!-- Through routes -->
+  <route id="NS" edges="N2C C2S"/>
+  <route id="SN" edges="S2C C2N"/>
+  <route id="EW" edges="E2C C2W"/>
+  <route id="WE" edges="W2C C2E"/>
+  <!-- Turn routes -->
+  <route id="NE" edges="N2C C2E"/>
+  <route id="NW" edges="N2C C2W"/>
+  <route id="SE" edges="S2C C2E"/>
+  <route id="SW" edges="S2C C2W"/>
+  <route id="EN" edges="E2C C2N"/>
+  <route id="ES" edges="E2C C2S"/>
+  <route id="WN" edges="W2C C2N"/>
+  <route id="WS" edges="W2C C2S"/>
+
+  <flow id="f0"  type="car"   route="NS" begin="0" end="3600" vehsPerHour="500" departLane="best" departSpeed="max"/>
+  <flow id="f1"  type="car"   route="SN" begin="0" end="3600" vehsPerHour="480" departLane="best" departSpeed="max"/>
+  <flow id="f2"  type="car"   route="EW" begin="0" end="3600" vehsPerHour="450" departLane="best" departSpeed="max"/>
+  <flow id="f3"  type="car"   route="WE" begin="0" end="3600" vehsPerHour="470" departLane="best" departSpeed="max"/>
+  <flow id="f4"  type="car"   route="NE" begin="0" end="3600" vehsPerHour="120" departLane="best" departSpeed="max"/>
+  <flow id="f5"  type="car"   route="NW" begin="0" end="3600" vehsPerHour="100" departLane="best" departSpeed="max"/>
+  <flow id="f6"  type="car"   route="SE" begin="0" end="3600" vehsPerHour="110" departLane="best" departSpeed="max"/>
+  <flow id="f7"  type="car"   route="SW" begin="0" end="3600" vehsPerHour="90"  departLane="best" departSpeed="max"/>
+  <flow id="f8"  type="truck" route="NS" begin="0" end="3600" vehsPerHour="60"  departLane="best" departSpeed="max"/>
+  <flow id="f9"  type="truck" route="EW" begin="0" end="3600" vehsPerHour="55"  departLane="best" departSpeed="max"/>
+  <flow id="f10" type="bus"   route="WE" begin="0" end="3600" vehsPerHour="30"  departLane="best" departSpeed="max"/>
+</routes>

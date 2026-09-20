@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Traffic Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dash_board.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <div class="card">
+        <h2>SUMO Simulator</h2>
+        <!-- Live SUMO feed -->
+        <img id="sumoStream" src="/live" alt="SUMO Feed" width="800">
+        <div class="controls">
+          <button class="btn blue" onclick="startSim()">Start</button>
+          <button class="btn red" onclick="stopSim()">Stop</button>
+          <button class="btn yellow" onclick="resetSim()">Reset</button>
+          <button class="btn gray" onclick="fullscreenSim()">Fullscreen</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Traffic Light Status</h2>
+        <div class="traffic-lights">
+          <!-- Enhanced traffic light widgets with lane info -->
+          <div class="traffic-light" id="lightA">
+            <div class="light red"></div>
+            <div class="light yellow"></div>
+            <div class="light green"></div>
+            <div class="intersection-info">
+              <span class="intersection-name">Intersection A</span>
+              <div class="lane-status">
+                <div class="lane" id="laneA-North">
+                  <span class="lane-signal" id="signalA-North">🔴</span>
+                  N: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+                <div class="lane" id="laneA-South">
+                  <span class="lane-signal" id="signalA-South">🔴</span>
+                  S: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+                <div class="lane" id="laneA-East">
+                  <span class="lane-signal" id="signalA-East">🔴</span>
+                  E: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+                <div class="lane" id="laneA-West">
+                  <span class="lane-signal" id="signalA-West">🔴</span>
+                  W: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="traffic-light" id="lightB">
+            <div class="light red"></div>
+            <div class="light yellow"></div>
+            <div class="light green"></div>
+            <div class="intersection-info">
+              <span class="intersection-name">Intersection B</span>
+              <div class="lane-status">
+                <div class="lane" id="laneB-North">
+                  <span class="lane-signal" id="signalB-North">🔴</span>
+                  N: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+                <div class="lane" id="laneB-South">
+                  <span class="lane-signal" id="signalB-South">🔴</span>
+                  S: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+                <div class="lane" id="laneB-East">
+                  <span class="lane-signal" id="signalB-East">🔴</span>
+                  E: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+                <div class="lane" id="laneB-West">
+                  <span class="lane-signal" id="signalB-West">🔴</span>
+                  W: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="traffic-light" id="lightC">
+            <div class="light red"></div>
+            <div class="light yellow"></div>
+            <div class="light green"></div>
+            <div class="intersection-info">
+              <span class="intersection-name">Intersection C</span>
+              <div class="lane-status">
+                <div class="lane" id="laneC-North">
+                  <span class="lane-signal" id="signalC-North">🔴</span>
+                  N: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+                <div class="lane" id="laneC-South">
+                  <span class="lane-signal" id="signalC-South">🔴</span>
+                  S: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+                <div class="lane" id="laneC-East">
+                  <span class="lane-signal" id="signalC-East">🔴</span>
+                  E: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+                <div class="lane" id="laneC-West">
+                  <span class="lane-signal" id="signalC-West">🔴</span>
+                  W: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="traffic-light" id="lightD">
+            <div class="light red"></div>
+            <div class="light yellow"></div>
+            <div class="light green"></div>
+            <div class="intersection-info">
+              <span class="intersection-name">Intersection D</span>
+              <div class="lane-status">
+                <div class="lane" id="laneD-North">
+                  <span class="lane-signal" id="signalD-North">🔴</span>
+                  N: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+                <div class="lane" id="laneD-South">
+                  <span class="lane-signal" id="signalD-South">🔴</span>
+                  S: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+                <div class="lane" id="laneD-East">
+                  <span class="lane-signal" id="signalD-East">🔴</span>
+                  E: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+                <div class="lane" id="laneD-West">
+                  <span class="lane-signal" id="signalD-West">🔴</span>
+                  W: <span class="vehicles">0</span> <span class="wait">0s</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="card">
+        <h2>Manual Signal Control</h2>
+        <button class="btn red" onclick="setSignal('all_red')">All Red</button>
+        <button class="btn green" onclick="setSignal('ns_green')">NS Green</button>
+        <button class="btn green" onclick="setSignal('ew_green')">EW Green</button>
+        <button class="btn yellow" onclick="setSignal('all_yellow')">All Yellow</button>
+        <button class="btn blue" onclick="setSignal('emergency')">Emergency</button>
+        <button class="btn red" onclick="setSignal('flash_red')">Flash Red</button>
+        <button class="btn yellow" onclick="setSignal('flash_yellow')">Flash Yellow</button>
+        <button class="btn blue" onclick="setSignal('auto_cycle')">Auto Cycle</button>
+        <button class="btn gray" onclick="setSignal('manual')">Manual Mode</button>
+      </div>
+      <div class="card">
+        <h2>Status</h2>
+        <p>Mode: <b id="mode">Manual</b></p>
+        <p>Phase: <b id="phase">All Red</b></p>
+        <p>Flow: <b id="flow">Stopped</b></p>
+        <p>Signal: <b id="status">Operational</b></p>
+        <p>Emergency: <b id="emergency">Inactive</b></p>
+      </div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='dash_board.js') }}"></script>
+</body>
+</html>

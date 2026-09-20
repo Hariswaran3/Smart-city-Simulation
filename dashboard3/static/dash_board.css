@@ -1,0 +1,172 @@
+body {
+  font-family: Arial;
+  background:#0f172a;
+  color:white;
+  margin:0;
+  padding:0;
+}
+.container {
+  display:flex;
+  flex-wrap:wrap;
+  height:100vh;
+}
+.left-panel, .right-panel {
+  padding:20px;
+  box-sizing:border-box;
+}
+.left-panel {
+  flex:2;
+  background:#1e293b;
+  min-width:400px;
+
+  /* 👇 added for bottom placement */
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  height:100vh;
+}
+.left-panel .card:last-child {
+  margin-top:auto; /* 👈 pushes traffic lights card down */
+}
+.right-panel {
+  flex:1;
+  background:#0f172a;
+  min-width:300px;
+}
+.card {
+  background:#1e293b;
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:20px;
+}
+#sumoStream {
+  width:100%;
+  height:300px;
+  border-radius:12px;
+  background:black;
+  object-fit:contain;
+}
+.btn {
+  border:none;
+  padding:10px 15px;
+  border-radius:8px;
+  margin:5px;
+  cursor:pointer;
+  font-size:14px;
+  color:white;
+}
+.btn.red { background:#ef4444; }
+.btn.green { background:#22c55e; }
+.btn.yellow { background:#facc15; color:black; }
+.btn.blue { background:#3b82f6; }
+.btn.gray { background:#6b7280; }
+.btn:hover {
+  opacity:0.9;
+  transform:translateY(-1px);
+}
+.btn:active {
+  transform:translateY(0);
+}
+
+.signal-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.signal {
+  background:#0f172a;
+  border-radius:12px;
+  padding:15px;
+  text-align:center;
+}
+.traffic-lights {
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
+  justify-content:flex-start;
+}
+.traffic-light {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  background:#1e293b;
+  padding:15px;
+  border-radius:12px;
+  border:2px solid #374151;
+  min-width:200px;
+  flex:1;
+  max-width:300px;
+}
+.traffic-light .light {
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  background:#4b5563;
+  margin:3px 0;
+  border:2px solid #000;
+  transition:all 0.3s ease;
+}
+.traffic-light .light.active.red { 
+  background:#ef4444; 
+  box-shadow:0 0 15px #ef4444;
+}
+.traffic-light .light.active.yellow { 
+  background:#facc15; 
+  box-shadow:0 0 15px #facc15;
+}
+.traffic-light .light.active.green { 
+  background:#22c55e; 
+  box-shadow:0 0 15px #22c55e;
+}
+.intersection-info {
+  margin-top:10px;
+  text-align:center;
+  width:100%;
+}
+.intersection-name {
+  font-size:14px;
+  font-weight:bold;
+  color:white;
+  display:block;
+  margin-bottom:8px;
+}
+.lane-status {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4px;
+  font-size:11px;
+}
+.lane {
+  background:#0f172a;
+  padding:4px 6px;
+  border-radius:4px;
+  color:#94a3b8;
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+.lane-signal {
+  font-size:12px;
+  margin-right:2px;
+}
+.lane .vehicles {
+  color:#3b82f6;
+  font-weight:bold;
+}
+.lane .wait {
+  color:#f59e0b;
+}
+.lane.congested {
+  background:#7f1d1d;
+  color:#fca5a5;
+}
+.lane.congested .wait {
+  color:#fbbf24;
+}
+.controls {
+  margin-top:15px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:center;
+}

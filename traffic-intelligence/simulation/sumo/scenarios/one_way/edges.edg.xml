@@ -1,0 +1,5 @@
+<edges>
+  <edge id="AB" from="A" to="B" numLanes="3" speed="16.67"/>
+  <edge id="BC" from="B" to="C" numLanes="3" speed="16.67"/>
+  <edge id="CD" from="C" to="D" numLanes="3" speed="16.67"/>
+</edges>

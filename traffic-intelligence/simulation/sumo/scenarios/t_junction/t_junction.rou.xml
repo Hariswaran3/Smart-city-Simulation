@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+  <vType id="car"   accel="2.6" decel="4.5" sigma="0.5" length="4.5"  maxSpeed="13.89" color="yellow"/>
+  <vType id="truck" accel="1.3" decel="3.5" sigma="0.5" length="12.0" maxSpeed="11.11" color="1,0.5,0"/>
+
+  <route id="WE"  edges="W2J J2E"/>
+  <route id="EW"  edges="E2J J2W"/>
+  <route id="NE"  edges="N2J J2E"/>
+  <route id="NW"  edges="N2J J2W"/>
+
+  <flow id="f_we"    type="car"   route="WE"  begin="0" end="3600" vehsPerHour="900" departLane="best" departSpeed="max"/>
+  <flow id="f_ew"    type="car"   route="EW"  begin="0" end="3600" vehsPerHour="700" departLane="best" departSpeed="max"/>
+  <flow id="f_ne"    type="car"   route="NE"  begin="0" end="3600" vehsPerHour="300" departLane="best" departSpeed="max"/>
+  <flow id="f_nw"    type="car"   route="NW"  begin="0" end="3600" vehsPerHour="150" departLane="best" departSpeed="max"/>
+  <flow id="f_truck" type="truck" route="WE"  begin="0" end="3600" vehsPerHour="80"  departLane="best" departSpeed="max"/>
+</routes>

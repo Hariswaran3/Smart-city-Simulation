@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+    <!-- Indian vehicle types -->
+    <vType id="car" accel="2.6" decel="4.5" sigma="0.5" length="4.5" maxSpeed="16.67" color="1,1,0"/>
+    <vType id="bus" accel="1.2" decel="4.0" sigma="0.3" length="12.0" maxSpeed="13.89" color="0,1,0"/>
+    <vType id="auto" accel="2.0" decel="4.5" sigma="0.7" length="3.5" maxSpeed="11.11" color="1,0,1"/>
+    <vType id="motorcycle" accel="3.0" decel="5.0" sigma="0.8" length="2.0" maxSpeed="19.44" color="1,0,0"/>
+    <vType id="truck" accel="1.0" decel="4.0" sigma="0.3" length="8.0" maxSpeed="13.89" color="0,0,1"/>
+    
+    <!-- Emergency vehicle types -->
+    <vType id="ambulance" accel="3.0" decel="6.0" sigma="0.1" length="6.0" maxSpeed="25.0" color="1,1,1" priority="10" guiShape="emergency"/>
+    <vType id="fire_truck" accel="2.0" decel="5.0" sigma="0.1" length="10.0" maxSpeed="20.0" color="1,0,0" priority="10" guiShape="firebrigade"/>
+    <vType id="police" accel="3.5" decel="6.0" sigma="0.1" length="5.0" maxSpeed="30.0" color="0,0,1" priority="10" guiShape="police"/>
+    
+    <!-- Routes -->
+    <route id="N2S" edges="N2C C2S"/>
+    <route id="N2E" edges="N2C C2E"/>
+    <route id="N2W" edges="N2C C2W"/>
+    <route id="S2N" edges="S2C C2N"/>
+    <route id="S2E" edges="S2C C2E"/>
+    <route id="S2W" edges="S2C C2W"/>
+    <route id="E2W" edges="E2C C2W"/>
+    <route id="E2N" edges="E2C C2N"/>
+    <route id="E2S" edges="E2C C2S"/>
+    <route id="W2E" edges="W2C C2E"/>
+    <route id="W2N" edges="W2C C2N"/>
+    <route id="W2S" edges="W2C C2S"/>
+    
+    <!-- Indian traffic flows -->
+    <flow id="N2S_car" route="N2S" begin="0" end="3600" vehsPerHour="400" type="car"/>
+    <flow id="N2E_auto" route="N2E" begin="0" end="3600" vehsPerHour="150" type="auto"/>
+    <flow id="N2W_bike" route="N2W" begin="0" end="3600" vehsPerHour="200" type="motorcycle"/>
+    
+    <flow id="S2N_car" route="S2N" begin="0" end="3600" vehsPerHour="350" type="car"/>
+    <flow id="S2E_bike" route="S2E" begin="0" end="3600" vehsPerHour="180" type="motorcycle"/>
+    <flow id="S2W_auto" route="S2W" begin="0" end="3600" vehsPerHour="120" type="auto"/>
+    
+    <flow id="E2W_car" route="E2W" begin="0" end="3600" vehsPerHour="300" type="car"/>
+    <flow id="E2N_auto" route="E2N" begin="0" end="3600" vehsPerHour="100" type="auto"/>
+    <flow id="E2S_bike" route="E2S" begin="0" end="3600" vehsPerHour="250" type="motorcycle"/>
+    
+    <flow id="W2E_car" route="W2E" begin="0" end="3600" vehsPerHour="280" type="car"/>
+    <flow id="W2N_bus" route="W2N" begin="0" end="3600" vehsPerHour="30" type="bus"/>
+    <flow id="W2S_truck" route="W2S" begin="0" end="3600" vehsPerHour="50" type="truck"/>
+    
+    <!-- Emergency vehicle flows - start immediately -->
+    <flow id="emergency_ambulance_NS" route="N2S" begin="10" end="3600" vehsPerHour="20" type="ambulance"/>
+    <flow id="emergency_ambulance_EW" route="E2W" begin="30" end="3600" vehsPerHour="15" type="ambulance"/>
+    <flow id="emergency_fire_NS" route="S2N" begin="50" end="3600" vehsPerHour="10" type="fire_truck"/>
+    <flow id="emergency_fire_EW" route="W2E" begin="70" end="3600" vehsPerHour="8" type="fire_truck"/>
+    <flow id="emergency_police_NS" route="N2S" begin="5" end="3600" vehsPerHour="12" type="police"/>
+    <flow id="emergency_police_EW" route="E2W" begin="25" end="3600" vehsPerHour="10" type="police"/>
+</routes>
